@@ -134,72 +134,37 @@
     50% { opacity: 0; }
   }
 
-  /* TÍTULO PRINCIPAL — HACKATHON */
-  .hackathon-title {
-    font-family: 'Press Start 2P', monospace;
-    text-align: center;
-    line-height: 1;
-    margin: 24px 0 14px;
-    font-size: clamp(40px, 10vw, 110px);
-    color: var(--primary);
-    letter-spacing: clamp(4px, 1vw, 12px);
-    text-shadow:
-       6px 0 0 var(--hot),
-      -6px 0 0 var(--cyan),
-       0 6px 0 #000,
-       0 0 32px rgba(255, 217, 61, 0.7);
-    animation: glitch 6s infinite, hackathon-pulse 2.5s ease-in-out infinite;
-    position: relative;
-  }
-  /* linha decorativa arcade abaixo do título */
-  .hackathon-title::after {
-    content: '';
-    display: block;
-    width: clamp(60%, 70%, 80%);
-    height: 4px;
-    margin: 14px auto 0;
-    background: repeating-linear-gradient(
-      90deg,
-      var(--primary) 0 14px,
-      transparent 14px 20px
-    );
-    box-shadow: 0 0 16px rgba(255, 217, 61, 0.6);
-  }
-  @keyframes hackathon-pulse {
-    0%, 100% { filter: brightness(1)   drop-shadow(0 0 0 transparent); }
-    50%      { filter: brightness(1.15) drop-shadow(0 0 18px rgba(255, 217, 61, 0.5)); }
-  }
-
-  /* SUBTÍTULO — PREPARE-SE / O DESAFIO ESTÁ CHEGANDO */
+  /* TÍTULO LOGOTIPO */
   .logo {
     font-family: 'Press Start 2P', monospace;
     text-align: center;
     line-height: 1;
-    margin: 14px 0 28px;
+    margin: 18px 0 6px;
   }
 
   .logo .line1 {
     display: block;
-    font-size: clamp(14px, 3vw, 26px);
-    color: var(--text);
+    font-size: clamp(20px, 4.5vw, 44px);
+    color: var(--primary);
     letter-spacing: 3px;
-    opacity: 0.9;
     text-shadow:
-       2px 0 0 var(--hot),
-      -2px 0 0 var(--cyan),
-       0 2px 0 #000;
+       3px 0 0 var(--hot),
+      -3px 0 0 var(--cyan),
+       0 3px 0 #000,
+       0 0 18px rgba(255, 217, 61, 0.6);
+    animation: glitch 6s infinite;
   }
 
   .logo .line2 {
     display: block;
-    font-size: clamp(16px, 3.6vw, 34px);
-    margin-top: 8px;
-    color: var(--hot);
-    letter-spacing: 3px;
+    font-size: clamp(24px, 5.5vw, 64px);
+    margin-top: 6px;
+    color: var(--text);
+    letter-spacing: 4px;
     text-shadow:
-       2px 0 0 #000,
-       0 0 14px rgba(255, 45, 117, 0.5);
-    animation: pulse-text 2s ease-in-out infinite;
+       4px 0 0 var(--hot),
+      -4px 0 0 var(--cyan),
+       0 4px 0 #000;
   }
 
   @keyframes glitch {
@@ -208,6 +173,17 @@
     94%  { transform: translate(2px, -1px); }
     96%  { transform: translate(-1px, 2px); }
     98%  { transform: translate(1px, 0); }
+  }
+
+  .tagline {
+    text-align: center;
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(9px, 1.3vw, 12px);
+    color: var(--hot);
+    letter-spacing: 3px;
+    margin: 10px 0 24px;
+    text-shadow: 0 0 12px rgba(255, 45, 117, 0.6);
+    animation: pulse-text 2s ease-in-out infinite;
   }
 
   @keyframes pulse-text {
@@ -563,6 +539,24 @@
     box-shadow: 0 0 0 3px var(--bg-deep), 0 0 0 5px var(--dim);
   }
 
+  .btn-fight {
+    color: var(--hot);
+    border-color: var(--hot);
+    box-shadow: 0 0 0 3px var(--bg-deep), 0 0 0 5px var(--hot);
+  }
+  .btn-fight:hover:not(:disabled) {
+    background: var(--hot);
+    color: #fff;
+  }
+  .btn-fight:not(:disabled) {
+    animation: fight-ready 0.6s ease-in-out infinite;
+  }
+
+  @keyframes fight-ready {
+    0%, 100% { box-shadow: 0 0 0 3px var(--bg-deep), 0 0 0 5px var(--hot), 0 0 30px var(--hot); }
+    50%      { box-shadow: 0 0 0 3px var(--bg-deep), 0 0 0 5px var(--hot), 0 0 60px var(--hot); }
+  }
+
   /* RODAPÉ ARCADE */
   .footer {
     margin-top: 56px;
@@ -579,55 +573,34 @@
     font-size: 12px;
   }
 
-  /* BOTÃO DE MÚSICA (ao lado do RESET) */
+  /* BOTÃO DE MÚSICA (no HUD do topo) */
   .music-toggle {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     font-family: 'Press Start 2P', monospace;
-    font-size: 14px;
-    letter-spacing: 3px;
-    padding: 18px 32px;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    padding: 6px 10px;
     background: transparent;
     color: var(--cyan);
-    border: 3px solid var(--cyan);
+    border: 2px solid var(--cyan);
     cursor: pointer;
-    transition: color 0.2s, background 0.2s, border-color 0.2s;
-    box-shadow: 0 0 0 3px var(--bg-deep), 0 0 0 5px var(--cyan);
-    /* pisca/pulsa enquanto está OFF para chamar atenção */
-    animation: music-attract 1.2s ease-in-out infinite;
-  }
-  @keyframes music-attract {
-    0%, 100% {
-      box-shadow: 0 0 0 3px var(--bg-deep), 0 0 0 5px var(--cyan), 0 0 8px rgba(0, 229, 255, 0.4);
-      transform: scale(1);
-    }
-    50% {
-      box-shadow: 0 0 0 3px var(--bg-deep), 0 0 0 5px var(--cyan), 0 0 32px rgba(0, 229, 255, 0.95);
-      transform: scale(1.04);
-    }
+    transition: all 0.2s;
+    box-shadow: 0 0 0 2px var(--bg-deep), 0 0 0 3px var(--cyan);
   }
   .music-toggle:hover {
     background: var(--cyan);
     color: #000;
-    transform: translateY(-2px);
   }
   .music-toggle .music-icon {
-    font-size: 18px;
+    font-size: 12px;
     line-height: 1;
-    animation: music-icon-blink 1.2s steps(2) infinite;
   }
-  @keyframes music-icon-blink {
-    0%, 100% { opacity: 1; }
-    50%      { opacity: 0.35; }
-  }
-  /* quando a música está tocando, para de piscar e ativa o "dance" do ícone */
   .music-toggle.playing {
     color: var(--primary);
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px var(--bg-deep), 0 0 0 5px var(--primary), 0 0 24px rgba(255,217,61,0.5);
-    animation: none;
-    transform: scale(1);
+    box-shadow: 0 0 0 2px var(--bg-deep), 0 0 0 3px var(--primary), 0 0 16px rgba(255,217,61,0.5);
   }
   .music-toggle.playing:hover {
     background: var(--primary);
@@ -639,6 +612,51 @@
   @keyframes music-bounce {
     from { transform: translateY(0)   scale(1); }
     to   { transform: translateY(-3px) scale(1.15); }
+  }
+
+  /* =================== TELA "FIGHT!" OVERLAY =================== */
+
+  .fight-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: #000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .fight-overlay.active { display: flex; }
+
+  .fight-overlay .fight-text {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(60px, 18vw, 240px);
+    color: var(--hot);
+    letter-spacing: 8px;
+    text-shadow:
+      8px 0 0 var(--primary),
+     -8px 0 0 var(--cyan),
+      0 0 80px var(--hot);
+    animation: fight-zoom 0.8s ease-out forwards;
+  }
+  .fight-overlay .fight-sub {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(14px, 2vw, 22px);
+    color: var(--primary);
+    letter-spacing: 4px;
+    margin-top: 24px;
+    opacity: 0;
+    animation: fight-sub 0.5s ease-out 0.8s forwards;
+  }
+
+  @keyframes fight-zoom {
+    0%   { transform: scale(0.1); opacity: 0; }
+    50%  { transform: scale(1.4); opacity: 1; }
+    100% { transform: scale(1);   opacity: 1; }
+  }
+
+  @keyframes fight-sub {
+    to { opacity: 1; }
   }
 
   /* MODO BOSS (KONAMI CODE) */
@@ -686,144 +704,9 @@
     .arcade { padding: 16px 12px 40px; }
     .btn { font-size: 11px; padding: 14px 22px; }
   }
-
-  /* =================== BOOT OVERLAY =================== */
-
-  .boot-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background:
-      radial-gradient(ellipse at center, rgba(74, 10, 74, 0.4) 0%, transparent 60%),
-      radial-gradient(ellipse at 30% 80%, rgba(122, 20, 50, 0.3) 0%, transparent 50%),
-      linear-gradient(180deg, #0a0612 0%, #060309 100%);
-    animation: boot-fade-in 0.4s ease-out;
-    cursor: pointer;
-  }
-  .boot-overlay::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      to bottom,
-      rgba(0,0,0,0) 0px,
-      rgba(0,0,0,0) 2px,
-      rgba(0,0,0,0.25) 3px,
-      rgba(0,0,0,0.25) 4px
-    );
-    pointer-events: none;
-    mix-blend-mode: multiply;
-  }
-  .boot-overlay.hidden {
-    animation: boot-fade-out 0.55s ease-in forwards;
-    pointer-events: none;
-  }
-  @keyframes boot-fade-in {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-  @keyframes boot-fade-out {
-    0%   { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(1.06); }
-  }
-
-  .boot-content {
-    text-align: center;
-    padding: 24px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .boot-decor {
-    font-family: 'Press Start 2P', monospace;
-    font-size: clamp(10px, 1.4vw, 14px);
-    color: var(--cyan);
-    letter-spacing: 8px;
-    margin: 12px 0;
-    opacity: 0.7;
-    animation: blink 1.2s steps(2) infinite;
-  }
-
-  .boot-title {
-    font-family: 'Press Start 2P', monospace;
-    font-size: clamp(36px, 9vw, 96px);
-    color: var(--primary);
-    letter-spacing: clamp(4px, 1vw, 12px);
-    margin: 16px 0 8px;
-    text-shadow:
-       6px 0 0 var(--hot),
-      -6px 0 0 var(--cyan),
-       0 6px 0 #000,
-       0 0 32px rgba(255, 217, 61, 0.7);
-    animation: glitch 6s infinite;
-    line-height: 1;
-  }
-
-  .boot-subtitle {
-    font-family: 'Press Start 2P', monospace;
-    font-size: clamp(11px, 1.6vw, 16px);
-    color: var(--hot);
-    letter-spacing: 4px;
-    margin: 0 0 48px;
-    text-shadow: 0 0 12px rgba(255, 45, 117, 0.6);
-  }
-
-  .boot-button {
-    font-family: 'Press Start 2P', monospace;
-    font-size: clamp(14px, 2.2vw, 22px);
-    letter-spacing: 4px;
-    padding: 22px 44px;
-    background: transparent;
-    color: var(--primary);
-    border: 4px solid var(--primary);
-    cursor: pointer;
-    box-shadow: 0 0 0 4px var(--bg-deep), 0 0 0 8px var(--primary);
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    animation: boot-button-pulse 1.2s ease-in-out infinite;
-    transition: color 0.15s, background 0.15s;
-  }
-  .boot-button:hover {
-    background: var(--primary);
-    color: #000;
-    animation-play-state: paused;
-  }
-  .boot-button .boot-icon {
-    font-size: 1.3em;
-    line-height: 1;
-    animation: music-bounce 0.5s ease-in-out infinite alternate;
-  }
-  @keyframes boot-button-pulse {
-    0%, 100% {
-      box-shadow: 0 0 0 4px var(--bg-deep), 0 0 0 8px var(--primary), 0 0 8px rgba(255,217,61,0.4);
-      transform: scale(1);
-    }
-    50% {
-      box-shadow: 0 0 0 4px var(--bg-deep), 0 0 0 8px var(--primary), 0 0 40px rgba(255,217,61,0.95);
-      transform: scale(1.04);
-    }
-  }
 </style>
 </head>
 <body>
-
-<!-- BOOT OVERLAY — destrava o áudio e dá uma tela de "insira ficha" -->
-<div class="boot-overlay" id="boot-overlay">
-  <div class="boot-content">
-    <div class="boot-decor">▼ ▼ ▼</div>
-    <h1 class="boot-title">HACKATHON</h1>
-    <p class="boot-subtitle">UI/UX FIGHTERS</p>
-    <button class="boot-button" id="boot-start" type="button">
-      <span class="boot-icon">♪</span>
-      <span>PRESS START</span>
-    </button>
-    <div class="boot-decor">▲ ▲ ▲</div>
-  </div>
-</div>
 
 <!-- OVERLAYS CRT -->
 <div class="crt-flicker"></div>
@@ -836,16 +719,19 @@
   <div class="hud">
     <span class="credits">CREDITS <span class="blink">04</span></span>
     <span>UI/UX FIGHTERS</span>
+    <button class="music-toggle" id="music-toggle" aria-label="Alternar música">
+      <span class="music-icon">♪</span>
+      <span>MUSIC: <span id="music-state">OFF</span></span>
+    </button>
   </div>
 
-  <!-- TÍTULO PRINCIPAL -->
-  <h1 class="hackathon-title">HACKATHON</h1>
-
-  <!-- SUBTÍTULO -->
-  <h2 class="logo">
+  <!-- LOGO -->
+  <h1 class="logo">
     <span class="line1">PREPARE-SE</span>
     <span class="line2">O DESAFIO ESTÁ CHEGANDO</span>
-  </h2>
+  </h1>
+
+  <p class="tagline">▸ HACKATHON ◂</p>
 
   <!-- PLACAR VS -->
   <div class="versus-board">
@@ -873,37 +759,38 @@
     <h2 class="select-title">SELECT YOUR FIGHTERS</h2>
 
     <div class="fighters-grid">
-      <button class="fighter" data-id="1" data-name="EDUARDA">
-        <img src="assets/eduarda.png" alt="Eduarda">
-        <span class="name-tag">EDUARDA</span>
-      </button>
-      <button class="fighter" data-id="2" data-name="LUCAS">
-        <img src="assets/lucas.png" alt="Lucas">
-        <span class="name-tag">LUCAS</span>
-      </button>
-      <button class="fighter" data-id="3" data-name="SAMANTHA">
-        <img src="assets/samantha.png" alt="Samantha">
-        <span class="name-tag">SAMANTHA</span>
-      </button>
-      <button class="fighter" data-id="4" data-name="RENAM">
-        <img src="assets/renam.png" alt="Renam">
-        <span class="name-tag">RENAM</span>
-      </button>
-      <button class="fighter" data-id="5" data-name="LEONARDO">
-        <img src="assets/leonardo.png" alt="Leonardo">
+      <!-- 7 LUTADORES + 1 SLOT MISTERIOSO -->
+      <button class="fighter" data-id="1" data-name="LEONARDO">
+        <img src="assets/fighter1.png" alt="Leonardo">
         <span class="name-tag">LEONARDO</span>
       </button>
-      <button class="fighter" data-id="6" data-name="DANILO">
-        <img src="assets/danilo.png" alt="Danilo">
-        <span class="name-tag">DANILO</span>
+      <button class="fighter" data-id="2" data-name="EDUARDA">
+        <img src="assets/fighter2.png" alt="Eduarda">
+        <span class="name-tag">EDUARDA</span>
       </button>
-      <button class="fighter" data-id="7" data-name="STEFANE">
-        <img src="assets/stefane.png" alt="Stefane">
+      <button class="fighter" data-id="3" data-name="SAMANTHA">
+        <img src="assets/fighter3.png" alt="Samantha">
+        <span class="name-tag">SAMANTHA</span>
+      </button>
+      <button class="fighter" data-id="4" data-name="STEFANE">
+        <img src="assets/fighter4.png" alt="Stefane">
         <span class="name-tag">STEFANE</span>
       </button>
+      <button class="fighter" data-id="5" data-name="LUCAS">
+        <img src="assets/fighter5.png" alt="Lucas">
+        <span class="name-tag">LUCAS</span>
+      </button>
+      <button class="fighter" data-id="6" data-name="DANILO">
+        <img src="assets/fighter6.png" alt="Danilo">
+        <span class="name-tag">DANILO</span>
+      </button>
+      <button class="fighter" data-id="8" data-name="RENAM">
+        <img src="assets/fighter8.png" alt="Renam">
+        <span class="name-tag">RENAM</span>
+      </button>
       <!-- EDMUNDO — sem foto ainda, vai cair no placeholder dinâmico -->
-      <button class="fighter" data-id="8" data-name="EDMUNDO">
-        <img src="assets/edmundo.png" alt="Edmundo">
+      <button class="fighter" data-id="9" data-name="EDMUNDO">
+        <img src="assets/fighter-edmundo.png" alt="Edmundo">
         <span class="name-tag">EDMUNDO</span>
       </button>
     </div>
@@ -912,11 +799,8 @@
 
   <!-- BOTÕES -->
   <div class="action-bar">
-    <button class="music-toggle" id="music-toggle" aria-label="Alternar música">
-      <span class="music-icon">♪</span>
-      <span>MUSIC: <span id="music-state">OFF</span></span>
-    </button>
     <button class="btn" id="btn-reset">► RESET ◄</button>
+    <button class="btn btn-fight" id="btn-fight" disabled>FIGHT!</button>
   </div>
 
   <!-- RODAPÉ -->
@@ -925,6 +809,12 @@
   </footer>
 
 </main>
+
+<!-- OVERLAY FIGHT! -->
+<div class="fight-overlay" id="fight-overlay">
+  <div class="fight-text">FIGHT!</div>
+  <div class="fight-sub">QUE COMECE O HACKATHON</div>
+</div>
 
 <script>
   // ===========================================================
@@ -963,6 +853,8 @@
   const slots = Array.from(document.querySelectorAll('.slot'));
   const fighters = Array.from(document.querySelectorAll('.fighter[data-id]'));
   const btnReset = document.getElementById('btn-reset');
+  const btnFight = document.getElementById('btn-fight');
+  const fightOverlay = document.getElementById('fight-overlay');
 
   // estado: index do slot corresponde a [P1, P2, P3, P4]
   let selection = [null, null, null, null];
@@ -978,12 +870,8 @@
       try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
       catch (e) { audioCtx = null; }
     }
-    // resume defensivo — navegadores suspendem o AudioContext até interação
-    if (audioCtx && audioCtx.state === 'suspended') {
-      audioCtx.resume().catch(() => {});
-    }
   }
-  function beep(freq = 440, dur = 0.08, type = 'square', vol = 0.12) {
+  function beep(freq = 440, dur = 0.08, type = 'square', vol = 0.05) {
     ensureAudio();
     if (!audioCtx) return;
     const osc = audioCtx.createOscillator();
@@ -996,9 +884,12 @@
     osc.start();
     osc.stop(audioCtx.currentTime + dur);
   }
-  function selectSound() { beep(880, 0.06, 'square', 0.12); setTimeout(() => beep(1320, 0.06, 'square', 0.12), 60); }
-  function lockSound()   { beep(660, 0.05, 'square', 0.14); setTimeout(() => beep(440, 0.14, 'square', 0.16), 50); }
-  function errorSound()  { beep(180, 0.20, 'sawtooth', 0.14); }
+  function selectSound() { beep(880, 0.06); setTimeout(() => beep(1320, 0.06), 60); }
+  function lockSound()   { beep(660, 0.05); setTimeout(() => beep(440, 0.12, 'square', 0.07), 50); }
+  function errorSound()  { beep(180, 0.18, 'sawtooth', 0.06); }
+  function fightSound()  {
+    [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => beep(f, 0.12, 'square', 0.08), i * 90));
+  }
 
   // ===========================================================
   // BGM — TECHNO SYNDROME-INSPIRED CHIPTUNE
@@ -1060,7 +951,7 @@
     if (!audioCtx) return;
     if (!masterGain) {
       masterGain = audioCtx.createGain();
-      masterGain.gain.value = 0.40;
+      masterGain.gain.value = 0.55;
       masterGain.connect(audioCtx.destination);
     }
   }
@@ -1151,9 +1042,9 @@
   // tenta tocar assets/bgm.mp3 se existir; senão usa chiptune
   async function tryPlayBgmFile() {
     if (!bgmAudio) {
-      bgmAudio = new Audio('assets/bgm.mp3');
+      bgmAudio = new Audio('bgm.mp3');
       bgmAudio.loop = true;
-      bgmAudio.volume = 0.40;
+      bgmAudio.volume = 0.55;
     }
     try {
       await bgmAudio.play();
@@ -1246,7 +1137,7 @@
       masterGain.gain.setValueAtTime(masterGain.gain.value, now);
       masterGain.gain.linearRampToValueAtTime(0, now + 0.2);
       setTimeout(() => {
-        if (masterGain) masterGain.gain.value = 0.40;
+        if (masterGain) masterGain.gain.value = 0.55;
       }, 250);
     }
   }
@@ -1311,10 +1202,13 @@
     // destaca próximo slot a preencher
     const next = nextEmptySlot();
     if (next !== -1) slots[next].classList.add('active-target');
+
+    // libera FIGHT! quando todos os 4 estão preenchidos
+    btnFight.disabled = selection.some(s => s === null);
   }
 
   fighters.forEach(f => {
-    f.addEventListener('mouseenter', () => beep(1100, 0.03, 'square', 0.06));
+    f.addEventListener('mouseenter', () => beep(1100, 0.025, 'square', 0.025));
     f.addEventListener('click', () => {
       if (f.classList.contains('taken')) { errorSound(); return; }
       const next = nextEmptySlot();
@@ -1338,7 +1232,7 @@
     slot.addEventListener('click', () => {
       if (selection[idx]) {
         selection[idx] = null;
-        beep(330, 0.12, 'square', 0.06);
+        beep(330, 0.12, 'square', 0.05);
         refreshUI();
       }
     });
@@ -1346,8 +1240,14 @@
 
   btnReset.addEventListener('click', () => {
     selection = [null, null, null, null];
-    beep(220, 0.15, 'sawtooth', 0.07);
+    beep(220, 0.15, 'sawtooth', 0.06);
     refreshUI();
+  });
+
+  btnFight.addEventListener('click', () => {
+    fightSound();
+    fightOverlay.classList.add('active');
+    setTimeout(() => fightOverlay.classList.remove('active'), 2800);
   });
 
   // ===========================================================
@@ -1361,35 +1261,9 @@
     if (buf.length > KONAMI.length) buf.shift();
     if (KONAMI.every((k, i) => k === buf[i])) {
       document.body.classList.add('boss-mode');
-      [880, 1100, 1320, 1760].forEach((f, i) => setTimeout(() => beep(f, 0.15, 'square', 0.09), i * 100));
+      [880, 1100, 1320, 1760].forEach((f, i) => setTimeout(() => beep(f, 0.15, 'square', 0.08), i * 100));
       buf = [];
     }
-  });
-
-  // destrava o áudio no primeiro clique em qualquer lugar (compatibilidade navegadores)
-  document.addEventListener('pointerdown', () => ensureAudio(), { once: true });
-
-  // ===========================================================
-  // BOOT OVERLAY — tela de "PRESS START" inicial
-  // ===========================================================
-  const bootOverlay = document.getElementById('boot-overlay');
-  const bootStart   = document.getElementById('boot-start');
-
-  function dismissBoot() {
-    bootOverlay.classList.add('hidden');
-    setTimeout(() => bootOverlay.remove(), 600);
-  }
-
-  bootStart.addEventListener('click', async () => {
-    // efeito sonoro de start
-    beep(440, 0.06, 'square', 0.14);
-    setTimeout(() => beep(660, 0.06, 'square', 0.14),  60);
-    setTimeout(() => beep(880, 0.10, 'square', 0.14), 120);
-    // ativa música e atualiza botão do HUD
-    await startMusic();
-    musicBtn.classList.add('playing');
-    musicState.textContent = 'ON ';
-    dismissBoot();
   });
 
   // inicializa
